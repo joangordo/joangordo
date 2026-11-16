@@ -1,49 +1,70 @@
-# Hi, I'm Joan Gordó
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg">
+  <img src="assets/header-light.svg" alt="Joan Gordó Guardia. Statistician and data scientist in Barcelona: flood forecasting, biostatistics and machine learning." width="100%">
+</picture>
 
-**Statistician and data scientist in Barcelona.** I build forecasting models, biostatistical
-analyses and machine-learning systems, and I care most about the part that usually gets
-skipped: checking whether the result holds up.
+<p>
+  <a href="mailto:jgordoguardia@gmail.com"><img src="https://img.shields.io/badge/Email-jgordoguardia%40gmail.com-1f2328?style=flat-square&logo=gmail&logoColor=white" alt="Email"></a>
+  <a href="https://www.linkedin.com/in/jgordoguardia/"><img src="https://img.shields.io/badge/LinkedIn-jgordoguardia-0A66C2?style=flat-square" alt="LinkedIn"></a>
+  <a href="https://huggingface.co/joangordo"><img src="https://img.shields.io/badge/Hugging%20Face-joangordo-FFD21E?style=flat-square&logo=huggingface&logoColor=black" alt="Hugging Face"></a>
+  <img src="https://img.shields.io/badge/Barcelona-open%20to%20relocation-59636e?style=flat-square&logo=googlemaps&logoColor=white" alt="Barcelona, open to relocation">
+</p>
 
-I'm a research assistant in the Statistics section of the University of Barcelona, where I
-work on machine-learning flood forecasting, and I'm doing the MSc in Data Science at the UOC.
-Before that I spent seven years as a financial data and tax advisor, so I'm used to working
-with messy real-world data, deadlines and people who need a clear answer rather than a model.
+I build forecasting models, biostatistical analyses and machine-learning systems, and I care
+most about the part that usually gets skipped: **checking whether the result holds up.**
 
-[jgordoguardia@gmail.com](mailto:jgordoguardia@gmail.com) ·
-[LinkedIn](https://www.linkedin.com/in/jgordoguardia/) ·
-[Hugging Face](https://huggingface.co/joangordo) ·
-Barcelona, Spain · open to relocation
+I'm a research assistant in the Statistics section of the University of Barcelona, working on
+machine-learning flood forecasting, and I'm doing the MSc in Data Science at the UOC. Before
+that I spent seven years as a financial data and tax advisor, so I'm used to messy real-world
+data, deadlines and people who need a clear answer rather than a model.
 
----
+**How I work**
 
-## How I work
+- **The baseline is the null hypothesis.** A model counts only if it beats a simple alternative out of sample.
+- **Uncertainty is part of the result.** Intervals, seed variability, simulations and sensitivity checks.
+- **Negative results get reported.** "The method does not work" is a finding, not a failure.
+- **Reproducible by default.** Tests, CI, pinned environments and reports generated from code.
 
-- **The baseline is the null hypothesis.** A model only counts if it beats a simple
-  alternative out of sample, by a margin chosen in advance, with a test that survives
-  multiple comparisons.
-- **Uncertainty is part of the result.** Confidence intervals, seed variability, simulation
-  studies and sensitivity analyses come with every headline number.
-- **Negative results get reported.** Several of my projects conclude that the method does
-  not work, or that the data cannot answer the question. That is a finding, not a failure.
-- **Reproducible by default.** Tests, continuous integration, pinned environments and
-  reports generated from code.
+<br>
 
----
+## Main project: flood forecasting on the Llobregat river
 
-## Featured projects
+<p>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/R-276DC3?style=flat-square&logo=r&logoColor=white" alt="R">
+  <img src="https://img.shields.io/badge/LightGBM-Tweedie%20loss-59636e?style=flat-square" alt="LightGBM with Tweedie loss">
+  <img src="https://img.shields.io/badge/live-every%2030%20min-1a7f37?style=flat-square" alt="Live, updated every 30 minutes">
+  <img src="https://img.shields.io/badge/paper-in%20preparation-8250df?style=flat-square" alt="Paper in preparation">
+</p>
 
-### Machine learning for flood forecasting on the Llobregat river · *main project*
+**Hourly streamflow forecasts and flood early warning, 1 to 6 hours ahead**, for a 4,948 km²
+Mediterranean basin that floods suddenly: in the November 2024 DANA the river at Sant Joan
+Despí rose from about 25 to 536 m³/s, just upstream of the plant that supplies drinking water
+to much of Barcelona. The system runs live and publishes its forecasts and four alert levels
+on a **[public web map](https://alexrodriguezmolla.github.io/llobregat-prediccio/)**.
 
-**Hourly streamflow forecasts and flood early warning, 1 to 6 hours ahead, for a
-4,948 km² Mediterranean basin**, running live and published on a
-**[public web map](https://alexrodriguezmolla.github.io/llobregat-prediccio/)**.
-First-author paper in preparation for *Ingeniería del Agua*; code repository going public
-soon.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/llobregat-skill-dark.svg">
+  <img src="assets/llobregat-skill-light.svg" alt="Line chart of forecast skill by lead time at Sant Joan Despí on the held-out year. Flood detection (CSI) falls from 0.93 at +1 h to 0.72 at +6 h; Nash-Sutcliffe efficiency falls from 0.85 to 0.62." width="100%">
+</picture>
 
-The Llobregat floods suddenly: in the November 2024 DANA its flow at Sant Joan Despí rose
-from about 25 to 536 m³/s, just upstream of the plant that supplies drinking water to much
-of Barcelona. The system forecasts the flow at two control points,
-Sant Joan Despí and Martorell, and translates it into four alert levels.
+- **The loss function mattered more than the algorithm.** The same LightGBM with a squared
+  loss was the worst model compared; with a Tweedie loss it was the best at almost every
+  horizon.
+- **Persistence is hard to beat, and I report it.** One hour ahead nothing beats repeating
+  the current flow; from three hours on, the model cuts persistence's error by about a
+  quarter, which is when a warning is useful.
+- **Better weather forecasts would not fix it.** Feeding the model the rain that actually
+  fell did not consistently reduce the error.
+
+I led the statistical modelling and validation; Àlex Rodríguez Molla built the operational
+pipeline and the web platform. First-author paper in preparation for *Ingeniería del Agua*;
+code repository going public soon. **Now** I'm leading its extension to basin-wide,
+multi-station prediction in Python.
+
+<details>
+<summary><b>Full project summary: data, modelling, validation and results</b></summary>
+<br>
 
 **Data.** 13 river gauges and 3 reservoirs from the Catalan Water Agency (ACA), 30 Meteocat
 rain gauges and ERA5-Land reanalysis (soil moisture at four depths, temperature, snow,
@@ -67,134 +88,142 @@ final year (June 2025 – May 2026) that the models never saw.
 | Flood detection (CSI, flow > 95th percentile) | 0.93 | 0.81 | 0.80 | 0.75 | 0.70 | 0.72 |
 | Skill vs persistence | −0.62 | 0.08 | 0.24 | 0.27 | 0.25 | 0.25 |
 
-What I learned from it:
-
-- **The loss function mattered more than the algorithm.** The same LightGBM trained with a
-  squared loss was the worst model in the comparison; with a Tweedie loss, which fits a flow
-  that is low most of the year and extreme on a few days, it was the best at almost every
-  horizon.
-- **Persistence is hard to beat, and I report it.** One hour ahead, nothing beats repeating
-  the current flow. From three hours on, the model cuts the error of persistence by about a
-  quarter, which is where an early warning is actually useful.
-- **The model learns the hydrology.** The current flow carries 75% of the importance at +2 h
-  and 43% at +6 h; accumulated basin rainfall and antecedent wetness take its place.
-- **Better weather forecasts would not fix it.** Feeding the model the rain that actually
-  fell (a perfect-forecast oracle) did not consistently reduce the error, so the remaining
-  error is not mainly a weather-forecast problem.
+**The model learns the hydrology.** The current flow carries 75% of the importance at +2 h
+and 43% at +6 h; accumulated basin rainfall and antecedent wetness take its place.
 
 **Operational system.** Every 30 minutes, a scheduled pipeline downloads the latest ACA and
 Meteocat data, builds the features, forecasts the six horizons and publishes them to the web
-map. Built with Àlex Rodríguez Molla, who developed the operational pipeline and the web
-platform; I led the statistical modelling and validation.
+map.
 
-**Now.** As a research assistant I'm leading its extension to basin-wide, multi-station
-prediction in Python (a model, features and hyperparameters per station, the full ACA
-historical record) and co-supervising an undergraduate thesis on the GIS side.
+**Next.** A model, features and hyperparameters per gauging station, more stations and
+reservoirs, and the full ACA historical record.
 
-### [Contaminant removal in low-biomass 16S data](https://github.com/joangordo/decontam-low-biomass) · R
+</details>
 
-How well do contaminant-removal methods work when the right answer is known? A benchmark on
-a public mock-community dilution series and a simulation study (48 scenarios × 20 studies),
-ending in a decision guide and a reusable cleaning workflow. Rebuilt from a workflow I first
-wrote during a biostatistics internship.
+<br>
 
-- DNA quantification matters more than the choice of method: 76% vs 8% of contamination
-  removed in very-low-biomass designs.
-- High thresholds remove real biology; prevalence methods break down with leaky controls.
-- Quarto reports, `testthat` tests, GitHub Actions, `renv`.
-  **[Read the reports →](https://joangordo.github.io/decontam-low-biomass/)**
+## More projects
 
-### [Can econometric forecasts beat buy & hold?](https://github.com/joangordo/can-forecasts-beat-buy-and-hold) · Python
+<table>
+<tr>
+<td width="50%" valign="top">
+<a href="https://github.com/joangordo/decontam-low-biomass"><img src="assets/decontam.png" alt="Bar chart: share of contaminant reads rising across a mock-community dilution series" width="100%"></a>
+<h3><a href="https://github.com/joangordo/decontam-low-biomass">Contaminant removal in low-biomass 16S data</a></h3>
+<p>Benchmark on a public mock-community dilution series and a simulation study (48 scenarios × 20 studies), ending in a decision guide. Rebuilt from a workflow I wrote during a biostatistics internship.</p>
+<p><b>Finding:</b> DNA quantification matters more than the method: 76% vs 8% of contamination removed.</p>
+<p><code>R</code> <code>Quarto</code> <code>testthat</code> <code>renv</code> · <a href="https://joangordo.github.io/decontam-low-biomass/">Read the reports</a></p>
+</td>
+<td width="50%" valign="top">
+<a href="https://github.com/joangordo/can-forecasts-beat-buy-and-hold"><img src="assets/forecasts.png" alt="Portfolio value of buy and hold versus forecast-based strategies across five test windows" width="100%"></a>
+<h3><a href="https://github.com/joangordo/can-forecasts-beat-buy-and-hold">Can econometric forecasts beat buy &amp; hold?</a></h3>
+<p>Walk-forward backtest on four ETFs, 2010–2026, with buy &amp; hold as the null hypothesis: ARIMA, GARCH and VAR forecasts, direction classifiers and volatility-managed portfolios, after costs.</p>
+<p><b>Finding:</b> no strategy beats buy &amp; hold's Sharpe ratio after Holm correction.</p>
+<p><code>Python</code> <code>statsmodels</code> <code>arch</code> <code>pytest</code></p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<a href="https://github.com/joangordo/game-chat-toxicity"><img src="assets/toxicity.png" alt="Macro-F1 by model with 95% bootstrap confidence intervals" width="100%"></a>
+<h3><a href="https://github.com/joangordo/game-chat-toxicity">Toxicity detection in game chat</a></h3>
+<p>Six-class detection on multilingual game chat, from TF-IDF to character-level networks written from scratch and a fine-tuned XLM-RoBERTa, then applied to another game without retraining.</p>
+<p><b>Finding:</b> the public benchmark cannot rank the models: 41% of test texts also appear in training.</p>
+<p><code>PyTorch</code> <code>Transformers</code> · <a href="https://huggingface.co/joangordo/game-chat-toxicity-xlmr">Model on Hugging Face</a></p>
+</td>
+<td width="50%" valign="top">
+<a href="https://github.com/joangordo/closer-geo"><img src="assets/closer.png" alt="Screenshot of the Closer geography game" width="100%"></a>
+<h3><a href="https://github.com/joangordo/closer-geo">Closer</a></h3>
+<p>A geography game on open country statistics: is each country closer to A or to B? An explicit difficulty model, games reproducible from a seed, and a versioned data pipeline (195 countries, 10 indicators).</p>
+<p><b>Try it:</b> <a href="https://joangordo.github.io/closer-geo/">play in the browser</a>.</p>
+<p><code>JavaScript</code> <code>Python</code></p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<a href="https://github.com/joangordo/trade-market-analysis"><img src="assets/trade.png" alt="Opportunity map: demand growth versus market size by product category" width="100%"></a>
+<h3><a href="https://github.com/joangordo/trade-market-analysis">Import opportunity scoring</a></h3>
+<p>Which product categories are worth importing from China into Spain? An end-to-end pipeline on official Eurostat trade data, from API ingestion to a configurable scoring model.</p>
+<p><b>Finding:</b> a worked example of why a top-ranked category was a false positive.</p>
+<p><code>Python</code> <code>pandas</code> <code>REST APIs</code></p>
+</td>
+<td width="50%" valign="top">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/causal-dark.svg">
+  <img src="assets/causal-light.svg" alt="Causal inference in games, work in progress" width="100%">
+</picture>
+<h3>Causal inference in games</h3>
+<p>Analysis of a mobile-game A/B test with a pre-registered analysis plan, and a regression discontinuity design on Steam data.</p>
+<p><b>Status:</b> in progress.</p>
+<p><code>Python</code> <code>A/B testing</code> <code>RDD</code></p>
+</td>
+</tr>
+</table>
 
-A walk-forward backtest on four ETFs (SPY, QQQ, GLD, TLT), 2010–2026, with buy & hold as the
-null hypothesis: ARIMA, GARCH and VAR forecasts, direction classifiers and volatility-managed
-portfolios, all after costs.
-
-- None of 16 model–asset pairs forecast returns better than a random walk (Diebold-Mariano).
-- No strategy beats buy & hold's Sharpe ratio after Holm correction, on the test period or
-  across five consecutive test windows.
-- `statsmodels`, `arch`, `scikit-learn`, HAC and bootstrap tests, a test suite that checks
-  for look-ahead bias.
-
-### [Toxicity detection in game chat](https://github.com/joangordo/game-chat-toxicity) · Python, PyTorch
-
-Six-class toxicity detection on multilingual game chat, from a TF-IDF baseline to
-character-level networks written from scratch and a fine-tuned XLM-RoBERTa, then applied
-without retraining to another game.
-
-- Models trained on game chat reach 0.93–0.95 AUROC; general-purpose toxicity models,
-  0.80–0.84.
-- A data audit showed the public benchmark cannot rank the models: two classes have only 11
-  test messages, and 41% of test texts also appear in training.
-- Custom training loop, bootstrap CIs, calibration and a human-in-the-loop moderation policy.
-  **[Model on Hugging Face →](https://huggingface.co/joangordo/game-chat-toxicity-xlmr)**
-
-### [Closer](https://github.com/joangordo/closer-geo) · JavaScript, Python
-
-A geography game built on open country statistics: is each country closer to A or to B? The
-rules are an explicit difficulty model, every game is reproducible from a seed, and the
-dataset (195 countries, 10 indicators) comes from a versioned pipeline with a coverage gate.
-**[Play it →](https://joangordo.github.io/closer-geo/)**
-
-### [Import opportunity scoring](https://github.com/joangordo/trade-market-analysis) · Python
-
-Which product categories are worth importing from China into Spain? An end-to-end pipeline
-on official Eurostat trade data: API ingestion, feature engineering and a configurable
-scoring model, with a worked example of why a top-ranked category was a false positive.
-
-### In progress
-
-**Causal inference in games:** analysis of a mobile-game A/B test with a pre-registered
-analysis plan, and a regression discontinuity design on Steam data.
-
----
+<br>
 
 ## Experience
 
 **Research Assistant, Statistics** · Dept. of Genetics, Microbiology and Statistics,
-University of Barcelona · Nov 2025 – present
-Statistical and machine-learning models on research datasets, with reproducible pipelines in
-Python and R. Leading the multi-station extension of the Llobregat flood-forecasting system;
-co-supervising an undergraduate on its GIS component; co-authoring the results for
-peer-reviewed publication.
+University of Barcelona · *Nov 2025 – present*<br>
+Statistical and machine-learning models with reproducible pipelines in Python and R. Leading
+the multi-station extension of the Llobregat flood-forecasting system and co-authoring its
+results for peer-reviewed publication.
 
-**Financial Data and Tax Advisor** · Assessoria 21 · Segurzon · 2019 – 2025
+**Financial Data and Tax Advisor** · Assessoria 21 · Segurzon · *2019 – 2025*<br>
 Managed and analysed financial and tax data for 60+ clients; built data models to detect
-inconsistencies and support decisions; turned complex regulation into clear reports for
-non-technical clients.
+inconsistencies; turned complex regulation into clear reports for non-technical clients.
 
-**Data Science Intern** · Gastroenterology Research, Vall d'Hebron Research Institute
-(VHIR) · 2018
-Cleaned, structured and validated clinical datasets, including low-biomass 16S microbiome
-data; wrote the lab's contaminant-removal workflow with `decontam`.
+**Data Science Intern** · Gastroenterology Research, Vall d'Hebron Research Institute (VHIR) · *2018*<br>
+Cleaned and validated clinical datasets, including low-biomass 16S microbiome data; wrote the
+lab's contaminant-removal workflow with `decontam`.
 
 ## Education
 
-**MSc in Data Science** · Universitat Oberta de Catalunya (UOC) · 2026 – 2027
-Electives: Deep Learning, Natural Language Processing.
+**MSc in Data Science** · Universitat Oberta de Catalunya (UOC) · *2026 – 2027*<br>
+Electives: Deep Learning, Natural Language Processing
 
-**BSc in Statistics** · Universitat de Barcelona / Universitat Politècnica de Catalunya ·
-graduated June 2026
-Thesis: machine learning for flood-risk prediction in the Llobregat basin, detecting extreme
-events in highly imbalanced data from heterogeneous hydrological and meteorological sources.
+**BSc in Statistics** · Universitat de Barcelona / Universitat Politècnica de Catalunya · *2026*<br>
+Thesis: machine learning for flood-risk prediction in the Llobregat basin
 
----
+<br>
 
 ## Toolbox
 
-| | |
-|---|---|
-| **Statistics** | regression and GLMs, time series (ARIMA, GARCH, VAR), hypothesis testing and multiple comparisons, bootstrap, simulation studies, Bayesian methods, A/B testing and experimental design, causal inference |
-| **Machine learning** | gradient boosting (LightGBM), random forests, scikit-learn, PyTorch, Hugging Face Transformers, imbalanced data, temporal cross-validation, calibration |
-| **Python** | pandas, NumPy, SciPy, statsmodels, matplotlib, pytest |
-| **R** | tidyverse, data.table, ggplot2, caret, Quarto, Shiny, testthat, renv, Bioconductor |
-| **Data and tools** | SQL, REST APIs, Git, GitHub Actions, GitHub Pages · familiar with SAS, SPSS, C++ |
+<p>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/R-276DC3?style=flat-square&logo=r&logoColor=white" alt="R">
+  <img src="https://img.shields.io/badge/SQL-336791?style=flat-square&logo=postgresql&logoColor=white" alt="SQL">
+  <img src="https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white" alt="pandas">
+  <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white" alt="NumPy">
+  <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white" alt="scikit-learn">
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=flat-square&logo=huggingface&logoColor=black" alt="Hugging Face">
+  <img src="https://img.shields.io/badge/LightGBM-59636e?style=flat-square" alt="LightGBM">
+  <img src="https://img.shields.io/badge/statsmodels-59636e?style=flat-square" alt="statsmodels">
+</p>
+<p>
+  <img src="https://img.shields.io/badge/tidyverse-1A162D?style=flat-square&logo=tidyverse&logoColor=white" alt="tidyverse">
+  <img src="https://img.shields.io/badge/Shiny-276DC3?style=flat-square&logo=rstudioide&logoColor=white" alt="Shiny">
+  <img src="https://img.shields.io/badge/Quarto-39729E?style=flat-square&logo=quarto&logoColor=white" alt="Quarto">
+  <img src="https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white" alt="Jupyter">
+  <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
+  <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white" alt="GitHub Actions">
+  <img src="https://img.shields.io/badge/SAS%20%2F%20SPSS-familiar-59636e?style=flat-square" alt="Familiar with SAS and SPSS">
+</p>
+
+**Methods:** regression and GLMs · time series (ARIMA, GARCH, VAR) · hypothesis testing and
+multiple comparisons · bootstrap · simulation studies · Bayesian methods · A/B testing and
+experimental design · causal inference · imbalanced data · temporal cross-validation ·
+calibration
 
 **Languages:** Catalan and Spanish (native) · English (C1, IELTS 7.0) · Mandarin (HSK 2,
 studying toward HSK 4)
 
+<br>
+
 ---
 
-Open to data science, biostatistics and ML roles in Barcelona or remote, and to relocation.
-Get in touch at [jgordoguardia@gmail.com](mailto:jgordoguardia@gmail.com) or on
-[LinkedIn](https://www.linkedin.com/in/jgordoguardia/).
+<p align="center">
+Open to data science, biostatistics and ML roles in Barcelona or remote, and to relocation.<br>
+<a href="mailto:jgordoguardia@gmail.com">jgordoguardia@gmail.com</a> ·
+<a href="https://www.linkedin.com/in/jgordoguardia/">LinkedIn</a>
+</p>
