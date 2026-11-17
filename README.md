@@ -40,8 +40,8 @@ data, deadlines and people who need a clear answer rather than a model.
 **Hourly streamflow forecasts and flood early warning, 1 to 6 hours ahead**, for a 4,948 km²
 Mediterranean basin that floods suddenly: in the November 2024 DANA the river at Sant Joan
 Despí rose from about 25 to 536 m³/s, just upstream of the plant that supplies drinking water
-to much of Barcelona. The system runs live and publishes its forecasts and four alert levels
-on a **[public web map](https://alexrodriguezmolla.github.io/llobregat-prediccio/)**.
+to much of Barcelona. The system runs live in the cloud and publishes its forecasts and alert
+levels on a **[public forecast page](https://joangordo.github.io/llobregat-operatiu-tfg/?lang=en)**.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/llobregat-skill-dark.svg">
@@ -57,18 +57,21 @@ on a **[public web map](https://alexrodriguezmolla.github.io/llobregat-prediccio
 - **Better weather forecasts would not fix it.** Feeding the model the rain that actually
   fell did not consistently reduce the error.
 
-I led the statistical modelling and validation; Àlex Rodríguez Molla built the operational
-pipeline and the web platform. First-author paper in preparation for *Ingeniería del Agua*;
-code repository going public soon. **Now** I'm leading its extension to basin-wide,
-multi-station prediction in Python.
+A project of the **BIOST3** research group (University of Barcelona). I led the statistical
+modelling and validation; **Àlex Rodríguez Molla** built the original operational system and web
+platform, which I later moved to GitHub Actions
+([code](https://github.com/joangordo/llobregat-operatiu-tfg)). Supervised by **Antonio
+Monleón-Getino**, **Pere López Brosa** and **Javier Méndez-Viera**. First-author paper with all
+of them in preparation for *Ingeniería del Agua*. **Now** I'm leading its extension to
+basin-wide, multi-station prediction in Python.
 
 <details>
 <summary><b>Full project summary: data, modelling, validation and results</b></summary>
 <br>
 
-**Data.** 13 river gauges and 3 reservoirs from the Catalan Water Agency (ACA), 30 Meteocat
-rain gauges and ERA5-Land reanalysis (soil moisture at four depths, temperature, snow,
-evapotranspiration), 2019–2026, about 127,000 half-hourly records. Gauge data are resampled
+**Data.** 13 river gauges and 3 reservoirs from the Catalan Water Agency (ACA) and 30 rain
+gauges from the Meteorological Service of Catalonia (Meteocat), 2019–2026, about 127,000
+half-hourly records, used under each agency's reuse conditions. Gauge data are resampled
 by taking the nearest reading rather than the mean, so flood peaks are not smoothed away.
 
 **Modelling.** 341 candidate predictors (lags, rolling maxima, accumulated basin rainfall,
@@ -91,9 +94,10 @@ final year (June 2025 – May 2026) that the models never saw.
 **The model learns the hydrology.** The current flow carries 75% of the importance at +2 h
 and 43% at +6 h; accumulated basin rainfall and antecedent wetness take its place.
 
-**Operational system.** Every 30 minutes, a scheduled pipeline downloads the latest ACA and
-Meteocat data, builds the features, forecasts the six horizons and publishes them to the web
-map.
+**Operational system.** Every 30 minutes, GitHub Actions downloads the latest ACA and
+Meteocat data, builds the features, forecasts the six horizons and publishes a bilingual
+[forecast page](https://joangordo.github.io/llobregat-operatiu-tfg/?lang=en). It is an experimental academic project, not an official warning
+system.
 
 **Next.** A model, features and hyperparameters per gauging station, more stations and
 reservoirs, and the full ACA historical record.
@@ -109,7 +113,7 @@ reservoirs, and the full ACA historical record.
 <td width="50%" valign="top">
 <a href="https://github.com/joangordo/decontam-low-biomass"><img src="assets/decontam.png" alt="Bar chart: share of contaminant reads rising across a mock-community dilution series" width="100%"></a>
 <h3><a href="https://github.com/joangordo/decontam-low-biomass">Contaminant removal in low-biomass 16S data</a></h3>
-<p>Benchmark on a public mock-community dilution series and a simulation study (48 scenarios × 20 studies), ending in a decision guide. Rebuilt from a workflow I wrote during a biostatistics internship.</p>
+<p>Benchmark on a public mock-community dilution series and a simulation study (48 scenarios × 20 studies), ending in a decision guide. An independent study on public data, prompted by my experience with low-biomass samples.</p>
 <p><b>Finding:</b> DNA quantification matters more than the method: 76% vs 8% of contamination removed.</p>
 <p><code>R</code> <code>Quarto</code> <code>testthat</code> <code>renv</code> · <a href="https://joangordo.github.io/decontam-low-biomass/">Read the reports</a></p>
 </td>
@@ -172,9 +176,9 @@ results for peer-reviewed publication.
 Managed and analysed financial and tax data for 60+ clients; built data models to detect
 inconsistencies; turned complex regulation into clear reports for non-technical clients.
 
-**Data Science Intern** · Gastroenterology Research, Vall d'Hebron Research Institute (VHIR) · *2018*<br>
-Cleaned and validated clinical datasets, including low-biomass 16S microbiome data; wrote the
-lab's contaminant-removal workflow with `decontam`.
+**Data Science Intern** · Vall d'Hebron Research Institute (VHIR) · *2018*<br>
+Data cleaning and statistical analysis in a biomedical research setting, including 16S
+microbiome data.
 
 ## Education
 
@@ -215,7 +219,7 @@ multiple comparisons · bootstrap · simulation studies · Bayesian methods · A
 experimental design · causal inference · imbalanced data · temporal cross-validation ·
 calibration
 
-**Languages:** Catalan and Spanish (native) · English (C1, IELTS 7.0) · Mandarin (HSK 2,
+**Languages:** Catalan and Spanish (native) · English (C1, IELTS 7.0) · Mandarin (HSK 2 level,
 studying toward HSK 4)
 
 <br>
